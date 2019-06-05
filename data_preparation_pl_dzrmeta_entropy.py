@@ -68,6 +68,8 @@ for _idx in tqdm(range(len(all_pl_with_dzrmeta))):
     _curr_pl_dict_for_feature_counts= dict()
     _curr_pl_dict_for_feature_list = dict()
 
+    ## 1. Add track-level characteristics
+
     for tr_feature in track_features_to_investigate:
         _curr_pl_dict_for_feature_counts[tr_feature] = np.zeros(len(dzr_metadata_sets_dict[tr_feature]))
         _curr_pl_dict_for_feature_list[tr_feature] = []
@@ -92,7 +94,7 @@ for _idx in tqdm(range(len(all_pl_with_dzrmeta))):
             pass
 
     # 2) get feature cohesion measure for each playlist
-    # Entorpy
+    # : Entorpy
     _entropies = [0 for _ in range(len(track_features_to_investigate))]
     for _tidx in range(len(track_features_to_investigate)):
         tr_feature = track_features_to_investigate[_tidx]
@@ -102,7 +104,8 @@ for _idx in tqdm(range(len(all_pl_with_dzrmeta))):
 
     _pl_feature.extend(_entropies)
 
-    ## (2) add playlist level characteristics
+
+    ## 2. Add playlist-level characteristics
     _pl_feature.extend([_pl['num_albums'],
                         _pl['num_artists'],
                         _pl['num_tracks'],

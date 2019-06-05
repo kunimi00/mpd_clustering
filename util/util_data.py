@@ -23,7 +23,7 @@ def load_txt_to_list(path):
 def save_list_as_csv(obj, path, _column_names):
     df = pd.DataFrame(obj, columns=_column_names)
     df.to_csv(path, index=False)
-    
+
 def load_csv_to_list(path, _delim=','):
     with open(path) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=_delim)
@@ -37,10 +37,10 @@ def load_csv_to_df(path, out_format='tuple', _delim=','):
     elif out_format == 'dict':
         return curr_df.to_dict().values()
 
-    
-## JSON format    
+
+## JSON format
 def save_dict_as_json(obj, path):
-    with open(path, 'w') as outfile:  
+    with open(path, 'w') as outfile:
         json.dump(obj, outfile)
 
 def load_json_to_dict(path):
@@ -48,3 +48,14 @@ def load_json_to_dict(path):
     js = f.read()
     f.close()
     return json.loads(js)
+
+
+
+## pickle (used before)
+def save_obj_curr_folder(obj, name):
+    with open(name, 'wb') as f:
+        pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
+
+def load_obj_curr_folder(name):
+    with open(name, 'rb') as f:
+        return pickle.load(f)

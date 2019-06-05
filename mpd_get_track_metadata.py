@@ -6,10 +6,10 @@ import spotipy
 import spotipy.util as sp_util
 from spotipy.oauth2 import SpotifyClientCredentials
 from bs4 import BeautifulStoneSoup, BeautifulSoup
-from mpd_handling.descriptions import *
+# from mpd_handling.descriptions import *
 import numpy as np
 import os
-
+import json
 
 def save_obj_curr_folder(obj, name):
     with open(name, 'wb') as f:

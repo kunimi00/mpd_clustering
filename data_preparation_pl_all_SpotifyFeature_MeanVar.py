@@ -106,10 +106,10 @@ for filename in tqdm(sorted(filenames)):
                     print('audio_feature err : ' + _curr_track_path)
                     continue
 
-            ## (1) add track level characteristics
-
 
             try:
+                ## (1) Add track level characteristics
+
                 # Compute averages
                 _avgs = []
                 for _tfidx in range(len(track_features_to_investigate)):
@@ -133,7 +133,7 @@ for filename in tqdm(sorted(filenames)):
 
                 # ..and ADD more intuitive characteristics..!
 
-                ## (2) add playlist level characteristics
+                ## (2) Add playlist level characteristics
 
                 _pl_feature.extend([_pl['num_albums'],
                                     _pl['num_artists'],
@@ -151,6 +151,7 @@ for filename in tqdm(sorted(filenames)):
                 pl_Y_title_list.append(normalize_name(_pl['name']))
 
                 _p_key += 1
+
             except:
                 print('error on average/variance computation : ' + str(idx) + ' in ' + filename)
                 pass
@@ -158,18 +159,20 @@ for filename in tqdm(sorted(filenames)):
 
 
 save_dict_as_json(pl_X, 'data_pl_all/pl_X_dict.json')
-# save_dict_as_json(pl_Y_desc, 'data_pl_all/pl_Y_desc_dict.json')
+# save_dict_as_json(pl_Y_desc, 'data_pl_all/pl_Y_desc_dict.json')  # We don't have them for all X this time.
 save_dict_as_json(pl_Y_title, 'data_pl_all/pl_Y_title_dict.json')
 
 save_dict_as_json(pl_id_to_key_dict, 'data_pl_all/pl_id_to_key_dict.json')
 save_dict_as_json(pl_key_to_id_dict, 'data_pl_all/pl_key_to_id_dict.json')
 
 save_list_as_txt(pl_X_list, 'data_pl_all/pl_X_list.txt')
-# save_list_as_txt(pl_Y_desc_list, 'data_pl_all/pl_Y_desc_list.txt')
+# save_list_as_txt(pl_Y_desc_list, 'data_pl_all/pl_Y_desc_list.txt')  # We don't have them for all X this time.
 save_list_as_txt(pl_Y_title_list, 'data_pl_all/pl_Y_title_list.txt')
 
 pl_X_arr = np.array([pl_X_list])
 np.save('data_pl_all/pl_X_arr.npy', pl_X_arr)
+
+
 
 '''
 Now come up with some playlist feature here :
@@ -205,6 +208,7 @@ _pl['pid']                      # : 94,
 
 '''
 _curr_track_info_list[idx]['info']
+e.g. : 
        {'album': {'album_type': 'compilation',
                   'artists': [{'external_urls': {'spotify': 'https://open.spotify.com/artist/4F7Q5NV6h5TSwCainz8S5A'},
                               'href': 'https://api.spotify.com/v1/artists/4F7Q5NV6h5TSwCainz8S5A',
@@ -277,4 +281,3 @@ e.g.
 
 
 '''
-
